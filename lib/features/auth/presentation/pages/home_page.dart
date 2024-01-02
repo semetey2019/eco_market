@@ -1,3 +1,4 @@
+import 'package:eco_market/features/auth/presentation/pages/product_page.dart';
 import 'package:flutter/material.dart';
 
 class HomePage extends StatefulWidget {
@@ -8,6 +9,16 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  int _selectedIndex = 0;
+
+  routerScreen({required int index}) {
+    if (_selectedIndex != index) {
+      setState(() {
+        _selectedIndex = index;
+      });
+    }
+  }
+
   List<GridMenuItem> gridMenuItem = [];
 
   @override
@@ -15,9 +26,19 @@ class _HomePageState extends State<HomePage> {
     super.initState();
     gridMenuItem = [
       GridMenuItem(
-          title: '', image: 'assets/images/category.png', onTap: () {}),
+          title: '',
+          image: 'assets/images/category.png',
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const ProductPage()));
+          }),
       GridMenuItem(
-          title: '', image: 'assets/images/category1.png', onTap: () {}),
+          title: '',
+          image: 'assets/images/category1.png',
+          onTap: () {
+            Navigator.push(context,
+                MaterialPageRoute(builder: (_) => const ProductPage()));
+          }),
       GridMenuItem(
           title: '', image: 'assets/images/category2.png', onTap: () {}),
       GridMenuItem(
@@ -80,7 +101,42 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
+      bottomNavigationBar: SizedBox(
+        child: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: (index) {
+            routerScreen(index: index);
+          },
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Главная',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag),
+              label: 'Корзина',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'История',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.info_outline_rounded),
+              label: 'Инфо',
+            ),
+          ],
+          selectedItemColor: const Color(0xff75db1b),
+          unselectedItemColor: Colors.grey,
+          showUnselectedLabels: true,
+        ),
+      ),
     );
+  }
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
   }
 }
 
@@ -95,41 +151,3 @@ class GridMenuItem {
   final String image;
   final VoidCallback onTap;
 }
-//       bottomNavigationBar: SizedBox(
-//         child: BottomNavigationBar(
-//           currentIndex: _selectedIndex,
-//           onTap: (index) {
-//             routerScreen(index: index);
-//           },
-//           items: const <BottomNavigationBarItem>[
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.home),
-//               label: 'Главная',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.shopping_bag),
-//               label: 'Корзина',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.history),
-//               label: 'История',
-//             ),
-//             BottomNavigationBarItem(
-//               icon: Icon(Icons.info_outline_rounded),
-//               label: 'Инфо',
-//             ),
-//           ],
-//           selectedItemColor: Color(0xff75db1b),
-//           unselectedItemColor: Colors.grey,
-//           showUnselectedLabels: true,
-//         ),
-//       ),
-//     );
-//   }
-
-//   void _onItemTapped(int index) {
-//     setState(() {
-//       _selectedIndex = index;
-//     });
-//   }
-// }
