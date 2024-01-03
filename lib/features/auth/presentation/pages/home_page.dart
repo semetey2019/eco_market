@@ -82,22 +82,26 @@ class _HomePageState extends State<HomePage> {
           itemCount: gridMenuItem.length,
           itemBuilder: (context, index) {
             String svgPath = gridMenuItem[index].image;
-            return SizedBox(
+            return InkWell(
+              onTap: gridMenuItem[index].onTap,
+              child: SizedBox(
                 child: DecoratedBox(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(16),
-                image: DecorationImage(
-                    image: AssetImage(svgPath), fit: BoxFit.cover),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(16),
+                    image: DecorationImage(
+                        image: AssetImage(svgPath), fit: BoxFit.cover),
+                  ),
+                  child: Text(
+                    gridMenuItem[index].title,
+                    style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 20,
+                        fontWeight: FontWeight.w700),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
               ),
-              child: Text(
-                gridMenuItem[index].title,
-                style: const TextStyle(
-                    color: Colors.white,
-                    fontSize: 20,
-                    fontWeight: FontWeight.w700),
-                textAlign: TextAlign.center,
-              ),
-            ));
+            );
           },
         ),
       ),
