@@ -8,7 +8,7 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
-  final List _nameProducts = [
+  List<String> _products = [
     "nknk",
     "nknk",
     "fgs",
@@ -17,15 +17,7 @@ class _ProductPageState extends State<ProductPage> {
     "dvdbfd",
     'dfegfe'
   ];
-  final List _story = [
-    "nknk",
-    "nknk",
-    "fgs",
-    "vdfbf",
-    "fdg",
-    "dvdbfd",
-    'dfegfe'
-  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -48,7 +40,7 @@ class _ProductPageState extends State<ProductPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: ListView(
+        child: Column(
           children: [
             TextField(
               decoration: InputDecoration(
@@ -62,71 +54,32 @@ class _ProductPageState extends State<ProductPage> {
                 ),
               ),
             ),
-            // const SizedBox(height: 20),
-            // Column(
-            //   children: [
-            //     Expanded(
-            //       child: ListView.builder(
-            //         shrinkWrap: true,
-            //         scrollDirection: Axis.horizontal,
-            //         itemCount: 7,
-            //         itemBuilder: (context, index) {
-            //           return getItem(index);
-
-            // SizedBox(
-            //   height: 20,
-            //   width: 100,
-            //   child: DecoratedBox(
-            //     decoration: BoxDecoration(
-            //       // backgroundBlendMode: ,
-            //       shape: BoxShape.rectangle,
-            //       border: Border.all(
-            //           strokeAlign: 20, width: 1, color: Colors.grey),
-            //       color: Colors.grey[400],
-            //       borderRadius: const BorderRadius.all(
-            //         Radius.circular(10),
-            //       ),
-            //     ),
-            //   ),
-            // );
-            // GestureDetector(
-            //   onTap: () {
-            //     Navigator.push(
-            //       context,
-            //       MaterialPageRoute(
-            //           builder: (context) => SecondScreen()),
-            //     );
-            //   },
-            //   child: _nameProducts[index],
-
-            //   // SizedBox(
-            //   //   height: 20,
-            //   //   width: 100,
-            //   //   child: DecoratedBox(
-            //   //     decoration: BoxDecoration(
-            //   //       // backgroundBlendMode: ,
-            //   //       shape: BoxShape.rectangle,
-            //   //       border: Border.all(
-            //   //           strokeAlign: 20, width: 1, color: Colors.grey),
-            //   //       color: Colors.grey[400],
-            //   //       borderRadius: const BorderRadius.all(
-            //   //         Radius.circular(10),
-            //   //       ),
-            //   //     ),
-            //   //   ),
-            //   //   // child: Text(
-            //   //   //   ' ${index + 1}',
-            //   //   //   style: TextStyle(fontSize: 20),
-            //   //   // ),
-            //   // ),
-            // );
-            //     },
-            //   ),
-            // ),
+            const SizedBox(height: 20),
+            SizedBox(
+              child: SingleChildScrollView(
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    SizedBox(
+                      height: 200,
+                      child: ListView.builder(
+                        scrollDirection: Axis.horizontal,
+                        itemCount: 7,
+                        itemBuilder: (context, index) => Container(
+                          height: 100,
+                          width: 100,
+                          margin: const EdgeInsets.all(10),
+                          child: Center(child: Text("cdcd $index")),
+                          color: Colors.amber,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
-        //   ]),
-        // ),
       ),
     );
   }
@@ -137,9 +90,9 @@ class SecondScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Второй экран'),
+        title: const Text('Второй экран'),
       ),
-      body: Center(
+      body: const Center(
         child: Text('Детали второго экрана'),
       ),
     );
@@ -148,7 +101,7 @@ class SecondScreen extends StatelessWidget {
 
 Widget getItem(int index) {
   return Container(
-    margin: EdgeInsets.all(10),
+    margin: const EdgeInsets.all(10),
     alignment: Alignment.center,
     height: 30,
     color: Colors.amber,
