@@ -61,18 +61,19 @@ class _ProductPageState extends State<ProductPage> {
                 mainAxisSize: MainAxisSize.min,
                 children: [
                   SizedBox(
-                    height: 50,
+                    height: 40,
                     child: ListView.separated(
                       scrollDirection: Axis.horizontal,
                       itemCount: 7,
                       itemBuilder: (context, index) => GestureDetector(
                         onTap: () => _products,
                         child: SizedBox(
-                          height: 50,
+                          height: 30,
                           child: DecoratedBox(
                             decoration: BoxDecoration(
-                              color:
-                                  _currentIndex == index ? null : Colors.white,
+                              color: _currentIndex == index
+                                  ? null
+                                  : Colors.grey[200],
                               gradient: _currentIndex == index
                                   ? const LinearGradient(
                                       begin: Alignment(0.80, -0.59),
@@ -83,7 +84,7 @@ class _ProductPageState extends State<ProductPage> {
                                       ],
                                     )
                                   : null,
-                              borderRadius: BorderRadius.circular(8),
+                              borderRadius: BorderRadius.circular(20),
                             ),
                             child: Padding(
                               padding: const EdgeInsets.fromLTRB(18, 6, 18, 6),
@@ -93,6 +94,7 @@ class _ProductPageState extends State<ProductPage> {
                                 children: [
                                   Text(
                                     _products[index],
+                                    style: TextStyle(color: Colors.grey[500]),
                                   ),
                                   const SizedBox(height: 5),
                                 ],
