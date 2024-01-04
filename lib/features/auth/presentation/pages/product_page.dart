@@ -8,14 +8,15 @@ class ProductPage extends StatefulWidget {
 }
 
 class _ProductPageState extends State<ProductPage> {
+  int _currentIndex = 0;
   List<String> _products = [
-    "nknk",
-    "nknk",
-    "fgs",
-    "vdfbf",
-    "fdg",
-    "dvdbfd",
-    'dfegfe'
+    "Все",
+    "Фрукты",
+    "Сухофрукты",
+    "Овощи",
+    "Зелень",
+    "Чай, кофе",
+    'Молочные продукты'
   ];
 
   @override
@@ -40,71 +41,77 @@ class _ProductPageState extends State<ProductPage> {
       ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: Column(
-          children: [
-            TextField(
-              decoration: InputDecoration(
-                hintText: "Быстрый поиск",
-                hintStyle: TextStyle(color: Colors.grey[300]),
-                prefixIcon: const Icon(Icons.search),
-                prefixIconColor: Colors.grey[300],
-                contentPadding: const EdgeInsets.symmetric(vertical: 12),
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(20),
-                ),
+        child: Column(children: [
+          TextField(
+            decoration: InputDecoration(
+              hintText: "Быстрый поиск",
+              hintStyle: TextStyle(color: Colors.grey[300]),
+              prefixIcon: const Icon(Icons.search),
+              prefixIconColor: Colors.grey[300],
+              contentPadding: const EdgeInsets.symmetric(vertical: 12),
+              border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20),
               ),
             ),
-            const SizedBox(height: 20),
-            SizedBox(
-              child: SingleChildScrollView(
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    SizedBox(
-                      height: 200,
-                      child: ListView.builder(
-                        scrollDirection: Axis.horizontal,
-                        itemCount: 7,
-                        itemBuilder: (context, index) => Container(
-                          height: 100,
-                          width: 100,
-                          margin: const EdgeInsets.all(10),
-                          child: Center(child: Text("cdcd $index")),
-                          color: Colors.amber,
+          ),
+          const SizedBox(height: 20),
+          SizedBox(
+            child: SingleChildScrollView(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  SizedBox(
+                    height: 50,
+                    child: ListView.separated(
+                      scrollDirection: Axis.horizontal,
+                      itemCount: 7,
+                      itemBuilder: (context, index) => GestureDetector(
+                        onTap: () => _products,
+                        child: SizedBox(
+                          height: 50,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                              color:
+                                  _currentIndex == index ? null : Colors.white,
+                              gradient: _currentIndex == index
+                                  ? const LinearGradient(
+                                      begin: Alignment(0.80, -0.59),
+                                      end: Alignment(-0.8, 0.59),
+                                      colors: [
+                                        Color(0xFF75DB1B),
+                                        Color(0xFF75DB1B)
+                                      ],
+                                    )
+                                  : null,
+                              borderRadius: BorderRadius.circular(8),
+                            ),
+                            child: Padding(
+                              padding: const EdgeInsets.fromLTRB(18, 6, 18, 6),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.center,
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    _products[index],
+                                  ),
+                                  const SizedBox(height: 5),
+                                ],
+                              ),
+                            ),
+                          ),
                         ),
                       ),
+                      separatorBuilder: (context, index) =>
+                          const SizedBox(width: 16),
                     ),
-                  ],
-                ),
+                  ),
+                  const SizedBox(height: 20),
+                ],
               ),
             ),
-          ],
-        ),
+          )
+        ]),
       ),
     );
   }
-}
-
-class SecondScreen extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: const Text('Второй экран'),
-      ),
-      body: const Center(
-        child: Text('Детали второго экрана'),
-      ),
-    );
-  }
-}
-
-Widget getItem(int index) {
-  return Container(
-    margin: const EdgeInsets.all(10),
-    alignment: Alignment.center,
-    height: 30,
-    color: Colors.amber,
-    child: Text('Item $index'),
-  );
 }
