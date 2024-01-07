@@ -1,3 +1,4 @@
+import 'package:eco_market/features/main/presentation/pages/product/product_page.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg.dart';
 
@@ -36,7 +37,7 @@ class _MainPageState extends State<MainPage> {
           },
           children: const [
             HomePage(),
-            Scaffold(),
+            ProductPage(),
             Scaffold(),
             Scaffold(),
           ],

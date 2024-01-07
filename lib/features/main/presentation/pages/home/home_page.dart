@@ -128,35 +128,35 @@ class _HomePageState extends State<HomePage> {
           },
         ),
       ),
-      // bottomNavigationBar: SizedBox(
-      //   child: BottomNavigationBar(
-      //     currentIndex: _selectedIndex,
-      //     onTap: (index) {
-      //       routerScreen(index: index);
-      //     },
-      //     items: const <BottomNavigationBarItem>[
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.home),
-      //         label: 'Главная',
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.shopping_bag),
-      //         label: 'Корзина',
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.history),
-      //         label: 'История',
-      //       ),
-      //       BottomNavigationBarItem(
-      //         icon: Icon(Icons.info_outline_rounded),
-      //         label: 'Инфо',
-      //       ),
-      //     ],
-      //     selectedItemColor: const Color(0xff75db1b),
-      //     unselectedItemColor: Colors.grey,
-      //     showUnselectedLabels: true,
-      //   ),
-      // ),
+      bottomNavigationBar: SizedBox(
+        child: BottomNavigationBar(
+          currentIndex: _selectedIndex,
+          onTap: (index) {
+            routerScreen(index: index);
+          },
+          items: const <BottomNavigationBarItem>[
+            BottomNavigationBarItem(
+              icon: Icon(Icons.home),
+              label: 'Главная',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.shopping_bag),
+              label: 'Корзина',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.history),
+              label: 'История',
+            ),
+            BottomNavigationBarItem(
+              icon: Icon(Icons.info_outline_rounded),
+              label: 'Инфо',
+            ),
+          ],
+          selectedItemColor: const Color(0xff75db1b),
+          unselectedItemColor: Colors.grey,
+          showUnselectedLabels: true,
+        ),
+      ),
     );
   }
 
