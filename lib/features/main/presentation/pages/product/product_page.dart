@@ -229,7 +229,9 @@ class _ProductPageState extends State<ProductPage> {
                     color: Colors.white,
                   ),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                      _showDialog(context);
+                    },
                     child: const Text(
                       'Корзина 396 с',
                       style: TextStyle(
@@ -406,195 +408,205 @@ class _ProductPageState extends State<ProductPage> {
     );
   }
 
-  Widget noInternet() {
-    return Column(
-      children: [
-        Image.asset("assets/images/apple.png"),
-        Container(
-          margin: const EdgeInsets.only(left: 20, bottom: 10),
-          child: const Text("Отсутствует интернет  соединение"),
-        ),
-        Container(
-          margin: const EdgeInsets.only(bottom: 20),
-          child: const Text("Попробуйте подключить мобильный интернет"),
-        ),
-        CustomButtomWidget(
-          text: "Ok",
-          onPressed: () async {
-            ConnectivityResult result =
-                await Connectivity().checkConnectivity();
-            print(result.toString());
-          },
-        )
-      ],
-    );
-  }
+  // Widget noInternet() {
+  //   return Column(
+  //     children: [
+  //       Image.asset(
+  //         "assets/images/connection.png",
+  //         height: 224,
+  //       ),
+  //       Container(
+  //         margin: const EdgeInsets.only(left: 20, bottom: 10),
+  //         child: const Text("Отсутствует интернет  соединение",
+  //             style: TextStyle(
+  //               fontSize: 24,
+  //               fontWeight: FontWeight.w700,
+  //             )),
+  //       ),
+  //       Container(
+  //         margin: const EdgeInsets.only(bottom: 20),
+  //         child: const Text("Попробуйте подключить мобильный интернет",
+  //             style: TextStyle(
+  //               fontSize: 18,
+  //               fontWeight: FontWeight.w400,
+  //             )),
+  //       ),
+  //       CustomButtomWidget(
+  //         text: "Ok",
+  //         onPressed: () async {
+  //           ConnectivityResult result =
+  //               await Connectivity().checkConnectivity();
+  //           print(result.toString());
+  //         },
+  //       )
+  //     ],
+  //   );
+  // }
 
 //////////////////// оформить заказ
-  showRule1(BuildContext context, Item item) => showModalBottomSheet<void>(
-        isScrollControlled: true,
-        context: context,
-        // showDragHandle: true,
-        backgroundColor: Colors.white,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
+  void _bottomSheet() {
+    showRule1(BuildContext context, Item item) => showModalBottomSheet<void>(
+          isScrollControlled: true,
+          context: context,
+          // showDragHandle: true,
+          backgroundColor: Colors.white,
+          shape: const RoundedRectangleBorder(
+            borderRadius: BorderRadius.only(
+              topLeft: Radius.circular(20),
+              topRight: Radius.circular(20),
+            ),
           ),
-        ),
-        builder: (BuildContext context) => StatefulBuilder(
-          builder: (context, StateSetter setState) => Padding(
-            padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-            child: Wrap(children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Stack(children: [
-                    Image.asset(
-                      'assets/images/dragon.png',
-                      fit: BoxFit.cover,
+          builder: (BuildContext context) => StatefulBuilder(
+            builder: (context, StateSetter setState) => Padding(
+              padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+              child: Wrap(children: [
+                Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Stack(children: [
+                      Image.asset(
+                        'assets/images/dragon.png',
+                        fit: BoxFit.cover,
+                      ),
+                      const Positioned(
+                        top: 50,
+                        right: 40,
+                        child: Icon(
+                          Icons.restore_from_trash_sharp,
+                          color: Colors.red,
+                        ),
+                      )
+                    ]),
+                    const Column(
+                      children: [
+                        Text(
+                          'Драконий фрукт',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          'Цена 340 с за шт',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        const SizedBox(height: 15),
+                        Text(
+                          '340 с ',
+                          style: TextStyle(
+                            color: Color(0xFF75DB1B),
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
                     ),
-                    const Positioned(
-                      top: 50,
-                      right: 40,
-                      child: Icon(
-                        Icons.restore_from_trash_sharp,
-                        color: Colors.red,
-                      ),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        IconButtonWidget(
+                            icon: Icons.remove,
+                            onTap: () {
+                              setState(() {
+                                item.decrementCounter();
+                              });
+                            }),
+                        Text(
+                          item.getCounter().toString(),
+                          style: const TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        IconButtonWidget(
+                            icon: Icons.add,
+                            onTap: () {
+                              setState(() {
+                                item.incrementCounter();
+                              });
+                            })
+                      ],
+                    ),
+                    Column(
+                      children: [
+                        Table(
+                          columnWidths: const <int, TableColumnWidth>{
+                            0: FixedColumnWidth(140),
+                            1: FlexColumnWidth(),
+                          },
+                          defaultVerticalAlignment:
+                              TableCellVerticalAlignment.top,
+                          children: const <TableRow>[
+                            TableRow(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8),
+                                  child: Text(
+                                    'Сумма',
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8),
+                                  child: Text(
+                                      // '${reservation!.departure}',
+
+                                      "396 c"),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8),
+                                  child: Text(
+                                    'Доставка',
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8),
+                                  child: Text(
+                                      // '${reservation!.arrivalCountry}',
+                                      "150"),
+                                ),
+                              ],
+                            ),
+                            TableRow(
+                              children: <Widget>[
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8),
+                                  child: Text(
+                                    'Итого',
+                                  ),
+                                ),
+                                Padding(
+                                  padding: EdgeInsets.symmetric(vertical: 8),
+                                  child: Text(
+                                      // '${reservation!.tourDateStart} – ${reservation!.tourDateStop}',
+                                      "350"),
+                                ),
+                              ],
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                    CustomButtomWidget(
+                      text: 'Оформить заказ',
+                      onPressed: () {},
                     )
-                  ]),
-                  const Column(
-                    children: [
-                      Text(
-                        'Драконий фрукт',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        'Цена 340 с за шт',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      Text(
-                        '340 с ',
-                        style: TextStyle(
-                          color: Color(0xFF75DB1B),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButtonWidget(
-                          icon: Icons.remove,
-                          onTap: () {
-                            setState(() {
-                              item.decrementCounter();
-                            });
-                          }),
-                      Text(
-                        item.getCounter().toString(),
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      IconButtonWidget(
-                          icon: Icons.add,
-                          onTap: () {
-                            setState(() {
-                              item.incrementCounter();
-                            });
-                          })
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Table(
-                        columnWidths: const <int, TableColumnWidth>{
-                          0: FixedColumnWidth(140),
-                          1: FlexColumnWidth(),
-                        },
-                        defaultVerticalAlignment:
-                            TableCellVerticalAlignment.top,
-                        children: const <TableRow>[
-                          TableRow(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                  'Сумма',
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                    // '${reservation!.departure}',
-
-                                    "396 c"),
-                              ),
-                            ],
-                          ),
-                          TableRow(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                  'Доставка',
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                    // '${reservation!.arrivalCountry}',
-                                    "150"),
-                              ),
-                            ],
-                          ),
-                          TableRow(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                  'Итого',
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                    // '${reservation!.tourDateStart} – ${reservation!.tourDateStop}',
-                                    "350"),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  CustomButtomWidget(
-                    text: 'Оформить заказ',
-                    onPressed: () {},
-                  )
-                ],
-              ),
-            ]),
+                  ],
+                ),
+              ]),
+            ),
           ),
-        ),
-      );
+        );
+  }
 }
-
-
-
 
 // Future<String>checkAppConnectivity() async {
 //     final connectivityResult = await (Connectivity().checkConnectivity());
@@ -612,24 +624,71 @@ class _ProductPageState extends State<ProductPage> {
 //   return "no connected";
 //   }
 
+// StreamBuilder(
+//                       stream: Connectivity().onConnectivityChanged,
+//                       builder: (context,
+//                           AsyncSnapshot<ConnectivityResult> snapshot) {
+//                         print(snapshot.toString());
+//                         if (snapshot.hasData) {
+//                           ConnectivityResult? result = snapshot.data;
+//                           if (result == ConnectivityResult.mobile) {
+//                             return connected('Mobile');
+//                           } else if (result == ConnectivityResult.wifi) {
+//                             return connected('WIFI');
+//                           } else {
+//                             return noInternet();
+//                           }
+//                         } else {
+//                           return loading();
+//                         }
+//                       }),
 
-
-
-  // StreamBuilder(
-  //                       stream: Connectivity().onConnectivityChanged,
-  //                       builder: (context,
-  //                           AsyncSnapshot<ConnectivityResult> snapshot) {
-  //                         print(snapshot.toString());
-  //                         if (snapshot.hasData) {
-  //                           ConnectivityResult? result = snapshot.data;
-  //                           if (result == ConnectivityResult.mobile) {
-  //                             return connected('Mobile');
-  //                           } else if (result == ConnectivityResult.wifi) {
-  //                             return connected('WIFI');
-  //                           } else {
-  //                             return noInternet();
-  //                           }
-  //                         } else {
-  //                           return loading();
-  //                         }
-  //                       }),
+Future<void> _showDialog(BuildContext context) async {
+  return showDialog<void>(
+    context: context,
+    builder: (BuildContext context) {
+      return AlertDialog(
+        content: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Image.asset(
+              "assets/images/connection.png",
+              height: 224,
+            ),
+            Container(
+              margin: const EdgeInsets.only(left: 20, bottom: 10),
+              child: const Text(
+                "Отсутствует интернет соединение",
+                style: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.w700,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            Container(
+              margin: const EdgeInsets.only(bottom: 20),
+              child: Text(
+                "Попробуйте подключить мобильный интернет",
+                style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w400,
+                    color: Colors.grey[500]),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            CustomButtomWidget(
+              onPressed: () async {
+                ConnectivityResult result =
+                    await Connectivity().checkConnectivity();
+                print(result.toString());
+                Navigator.of(context).pop(); // Закрыть диалог
+              },
+              text: 'Ok',
+            )
+          ],
+        ),
+      );
+    },
+  );
+}
