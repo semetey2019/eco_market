@@ -648,11 +648,13 @@ Future<void> _showDialog(BuildContext context) async {
     context: context,
     builder: (BuildContext context) {
       return AlertDialog(
+        backgroundColor: Colors.white,
         content: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
             Image.asset(
               "assets/images/connection.png",
+              color: Color(0xffD2DAE8),
               height: 224,
             ),
             Container(

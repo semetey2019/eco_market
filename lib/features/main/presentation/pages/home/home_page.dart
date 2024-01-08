@@ -132,6 +132,9 @@ class _HomePageState extends State<HomePage> {
         child: BottomNavigationBar(
           currentIndex: _selectedIndex,
           onTap: (index) {
+            setState(() {
+              _selectedIndex = index;
+            });
             routerScreen(index: index);
           },
           items: const <BottomNavigationBarItem>[

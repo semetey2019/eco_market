@@ -1,6 +1,8 @@
 import 'package:eco_market/features/main/presentation/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 
+import '../features/main/presentation/pages/home/bottom_nav.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -13,7 +15,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: HomePage(),
     );
   }
 }
