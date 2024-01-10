@@ -425,109 +425,108 @@ showRule1(BuildContext context, Item item) => showModalBottomSheet<void>(
               scrollDirection: Axis.vertical,
               itemBuilder: (context, index) {
                 return ListTile(
-                    leading: Stack(children: [
-                      Image.asset(
-                        'assets/images/dragon.png',
-                        height: 100,
-                        width: 86,
-                        fit: BoxFit.cover,
-                      ),
-                      Positioned(
-                        top: 25,
-                        child: GestureDetector(
-                          onTap: () {},
-                          child: SizedBox(
-                            height: 38,
-                            width: 38,
-                            child: DecoratedBox(
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(12),
-                                  color: Colors.white),
-                              child: const Icon(
-                                Icons.delete,
-                                color: Colors.red,
-                                size: 30,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ),
-                    ]),
-                    title: const Column(
-                      mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          'Драконий фрукт',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        Text(
-                          'Цена 340 с за шт',
-                          style: TextStyle(
-                            color: Colors.black,
-                            fontSize: 12,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      ],
+                  leading: Stack(children: [
+                    Image.asset(
+                      'assets/images/dragon.png',
+                      height: 100,
+                      width: 86,
+                      fit: BoxFit.cover,
                     ),
-                    subtitle: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        const Text(
-                          '340 с ',
-                          style: TextStyle(
-                            color: Color(0xFF75DB1B),
-                            fontSize: 20,
-                            fontWeight: FontWeight.w700,
+                    Positioned(
+                      top: 25,
+                      child: GestureDetector(
+                        onTap: () {},
+                        child: SizedBox(
+                          height: 38,
+                          width: 38,
+                          child: DecoratedBox(
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(12),
+                                color: Colors.white),
+                            child: const Icon(
+                              Icons.delete,
+                              color: Colors.red,
+                              size: 30,
+                            ),
                           ),
                         ),
-                        Row(
-                          children: [
-                            IconButtonWidget(
-                              icon: Icons.remove,
-                              onTap: () {
-                                setState(
-                                  () {
-                                    item.decrementCounter();
-                                  },
-                                );
-                              },
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            Text(
-                              item.getCounter().toString(),
-                              style: const TextStyle(
-                                fontSize: 18,
-                                fontWeight: FontWeight.w500,
-                              ),
-                            ),
-                            const SizedBox(
-                              width: 20,
-                            ),
-                            IconButtonWidget(
-                              icon: Icons.add,
-                              onTap: () {
-                                setState(() {
-                                  item.incrementCounter();
-                                });
-                              },
-                            ),
-                          ],
+                      ),
+                    ),
+                  ]),
+                  title: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      const Text(
+                        'Драконий фрукт',
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontSize: 14,
+                          fontWeight: FontWeight.w500,
                         ),
-                      ],
-                    ));
-              },
-              separatorBuilder: (context, index) => const SizedBox(
-                    height: 10,
+                      ),
+                      Text(
+                        'Цена 340 с за шт',
+                        style: TextStyle(
+                          color: Colors.grey[400],
+                          fontSize: 12,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                    ],
                   ),
-              itemCount: 15),
+                  subtitle: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        '340 с ',
+                        style: TextStyle(
+                          color: Color(0xFF75DB1B),
+                          fontSize: 20,
+                          fontWeight: FontWeight.w700,
+                        ),
+                      ),
+                      Row(
+                        children: [
+                          IconButtonWidget(
+                            icon: Icons.remove,
+                            onTap: () {
+                              setState(
+                                () {
+                                  item.decrementCounter();
+                                },
+                              );
+                            },
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          Text(
+                            item.getCounter().toString(),
+                            style: const TextStyle(
+                              fontSize: 18,
+                              fontWeight: FontWeight.w500,
+                            ),
+                          ),
+                          const SizedBox(
+                            width: 20,
+                          ),
+                          IconButtonWidget(
+                            icon: Icons.add,
+                            onTap: () {
+                              setState(() {
+                                item.incrementCounter();
+                              });
+                            },
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                );
+              },
+              separatorBuilder: (context, index) => const SizedBox(height: 10),
+              itemCount: 3),
         ),
       ),
     );

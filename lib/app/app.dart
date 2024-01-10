@@ -1,8 +1,6 @@
 import 'package:eco_market/features/main/presentation/pages/home/home_page.dart';
 import 'package:flutter/material.dart';
 
-import '../features/main/presentation/pages/home/bottom_nav.dart';
-
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
