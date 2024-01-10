@@ -1,3 +1,4 @@
+import 'package:eco_market/features/history/presentation/cubit/history_screen.dart';
 import 'package:eco_market/features/main/presentation/pages/product/product_page.dart';
 import 'package:flutter/material.dart';
 
@@ -137,20 +138,27 @@ class _HomePageState extends State<HomePage> {
             });
             routerScreen(index: index);
           },
-          items: const <BottomNavigationBarItem>[
-            BottomNavigationBarItem(
+          items: <BottomNavigationBarItem>[
+            const BottomNavigationBarItem(
               icon: Icon(Icons.home),
               label: 'Главная',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.shopping_bag),
               label: 'Корзина',
             ),
             BottomNavigationBarItem(
-              icon: Icon(Icons.history),
+              icon: InkWell(
+                  onTap: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => const HistoryScreen()));
+                  },
+                  child: const Icon(Icons.history)),
               label: 'История',
             ),
-            BottomNavigationBarItem(
+            const BottomNavigationBarItem(
               icon: Icon(Icons.info_outline_rounded),
               label: 'Инфо',
             ),

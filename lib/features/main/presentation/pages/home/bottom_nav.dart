@@ -1,3 +1,4 @@
+import 'package:eco_market/features/history/presentation/cubit/history_screen.dart';
 import 'package:eco_market/features/main/presentation/pages/home/home.dart';
 import 'package:eco_market/features/main/presentation/pages/product/product.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +15,7 @@ class _BottomWidgetState extends State<BottomWidget> {
   final screens = [
     const HomePage(),
     const ProductPage(),
-    const Scaffold(),
+    const HistoryScreen(),
     const Scaffold()
   ];
   @override

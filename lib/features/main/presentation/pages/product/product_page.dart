@@ -1,4 +1,3 @@
-import 'package:connectivity_plus/connectivity_plus.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
@@ -209,7 +208,9 @@ class _ProductPageState extends State<ProductPage> {
 ///////////////////////    Кoрзина
 
       floatingActionButton: GestureDetector(
-        onTap: () {},
+        onTap: () {
+          showRule1(context, Item());
+        },
         child: SizedBox(
           width: 168,
           height: 48,
@@ -228,17 +229,12 @@ class _ProductPageState extends State<ProductPage> {
                     // ignore: deprecated_member_use
                     color: Colors.white,
                   ),
-                  InkWell(
-                    onTap: () {
-                      // _showDialog(context);
-                    },
-                    child: const Text(
-                      'Корзина 396 с',
-                      style: TextStyle(
-                        color: Colors.white,
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                      ),
+                  const Text(
+                    'Корзина 396 с',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontSize: 16,
+                      fontWeight: FontWeight.w500,
                     ),
                   ),
                 ],
@@ -410,165 +406,128 @@ class _ProductPageState extends State<ProductPage> {
 }
 
 //////////////////// оформить заказ
-void _bottomSheet() {
-  showRule1(BuildContext context, Item item) => showModalBottomSheet<void>(
-        isScrollControlled: true,
-        context: context,
-        // showDragHandle: true,
-        backgroundColor: Colors.white,
-        shape: const RoundedRectangleBorder(
-          borderRadius: BorderRadius.only(
-            topLeft: Radius.circular(20),
-            topRight: Radius.circular(20),
-          ),
-        ),
-        builder: (BuildContext context) => StatefulBuilder(
-          builder: (context, StateSetter setState) => Padding(
-            padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
-            child: Wrap(children: [
-              Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Stack(children: [
-                    Image.asset(
-                      'assets/images/dragon.png',
-                      fit: BoxFit.cover,
-                    ),
-                    const Positioned(
-                      top: 50,
-                      right: 40,
-                      child: Icon(
-                        Icons.restore_from_trash_sharp,
-                        color: Colors.red,
-                      ),
-                    )
-                  ]),
-                  const Column(
-                    children: [
-                      Text(
-                        'Драконий фрукт',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 14,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      Text(
-                        'Цена 340 с за шт',
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      const SizedBox(height: 15),
-                      Text(
-                        '340 с ',
-                        style: TextStyle(
-                          color: Color(0xFF75DB1B),
-                          fontSize: 12,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                    ],
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      IconButtonWidget(
-                          icon: Icons.remove,
-                          onTap: () {
-                            setState(() {
-                              item.decrementCounter();
-                            });
-                          }),
-                      Text(
-                        item.getCounter().toString(),
-                        style: const TextStyle(
-                          fontSize: 15,
-                          fontWeight: FontWeight.w500,
-                        ),
-                      ),
-                      IconButtonWidget(
-                          icon: Icons.add,
-                          onTap: () {
-                            setState(() {
-                              item.incrementCounter();
-                            });
-                          })
-                    ],
-                  ),
-                  Column(
-                    children: [
-                      Table(
-                        columnWidths: const <int, TableColumnWidth>{
-                          0: FixedColumnWidth(140),
-                          1: FlexColumnWidth(),
-                        },
-                        defaultVerticalAlignment:
-                            TableCellVerticalAlignment.top,
-                        children: const <TableRow>[
-                          TableRow(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                  'Сумма',
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                    // '${reservation!.departure}',
 
-                                    "396 c"),
-                              ),
-                            ],
-                          ),
-                          TableRow(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                  'Доставка',
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                    // '${reservation!.arrivalCountry}',
-                                    "150"),
-                              ),
-                            ],
-                          ),
-                          TableRow(
-                            children: <Widget>[
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                  'Итого',
-                                ),
-                              ),
-                              Padding(
-                                padding: EdgeInsets.symmetric(vertical: 8),
-                                child: Text(
-                                    // '${reservation!.tourDateStart} – ${reservation!.tourDateStop}',
-                                    "350"),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  CustomButtomWidget(
-                    text: 'Оформить заказ',
-                    onPressed: () {},
-                  )
-                ],
-              ),
-            ]),
-          ),
+showRule1(BuildContext context, Item item) => showModalBottomSheet<void>(
+      isScrollControlled: true,
+      context: context,
+      // showDragHandle: true,
+      backgroundColor: Colors.white,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(20),
+          topRight: Radius.circular(20),
         ),
-      );
-}
+      ),
+      builder: (BuildContext context) => StatefulBuilder(
+        builder: (context, StateSetter setState) => Padding(
+          padding: const EdgeInsets.only(top: 16, left: 16, right: 16),
+          child: ListView.separated(
+              scrollDirection: Axis.vertical,
+              itemBuilder: (context, index) {
+                return ListTile(
+                    leading: Stack(children: [
+                      Image.asset(
+                        'assets/images/dragon.png',
+                        height: 100,
+                        width: 86,
+                        fit: BoxFit.cover,
+                      ),
+                      Positioned(
+                        top: 25,
+                        child: GestureDetector(
+                          onTap: () {},
+                          child: SizedBox(
+                            height: 38,
+                            width: 38,
+                            child: DecoratedBox(
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(12),
+                                  color: Colors.white),
+                              child: const Icon(
+                                Icons.delete,
+                                color: Colors.red,
+                                size: 30,
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                    ]),
+                    title: const Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Драконий фрукт',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 14,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                        Text(
+                          'Цена 340 с за шт',
+                          style: TextStyle(
+                            color: Colors.black,
+                            fontSize: 12,
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ],
+                    ),
+                    subtitle: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        const Text(
+                          '340 с ',
+                          style: TextStyle(
+                            color: Color(0xFF75DB1B),
+                            fontSize: 20,
+                            fontWeight: FontWeight.w700,
+                          ),
+                        ),
+                        Row(
+                          children: [
+                            IconButtonWidget(
+                              icon: Icons.remove,
+                              onTap: () {
+                                setState(
+                                  () {
+                                    item.decrementCounter();
+                                  },
+                                );
+                              },
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            Text(
+                              item.getCounter().toString(),
+                              style: const TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.w500,
+                              ),
+                            ),
+                            const SizedBox(
+                              width: 20,
+                            ),
+                            IconButtonWidget(
+                              icon: Icons.add,
+                              onTap: () {
+                                setState(() {
+                                  item.incrementCounter();
+                                });
+                              },
+                            ),
+                          ],
+                        ),
+                      ],
+                    ));
+              },
+              separatorBuilder: (context, index) => const SizedBox(
+                    height: 10,
+                  ),
+              itemCount: 15),
+        ),
+      ),
+    );
