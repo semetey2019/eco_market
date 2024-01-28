@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 
-import '../../widgets/custom_button.dart';
-import '../../widgets/fruits_name.dart';
+import '../../../../search/presentation/widgets/fruits_name_class.dart';
+import '../../widgets/custom_button_widget.dart';
+
 import '../../widgets/icon_button_widget.dart';
 import '../../widgets/item_class.dart';
 

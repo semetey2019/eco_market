@@ -1,9 +1,18 @@
-import 'package:eco_market/features/main/presentation/pages/product/product_page.dart';
+import 'package:auto_route/annotations.dart';
+import 'package:eco_market/config/theme/app_colors.dart';
+import 'package:eco_market/features/about/presentation/pages/about/about.dart';
+
+import 'package:eco_market/features/history/presentation/pages/history/history_page.dart';
+import 'package:eco_market/features/main/presentation/cubit/main_screen_cubit.dart';
+import 'package:eco_market/features/main/presentation/pages/home/home.dart';
+import 'package:eco_market/service_locator.dart';
 import 'package:flutter/material.dart';
-import 'package:svg_flutter/svg.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:svg_flutter/svg_flutter.dart';
 
-import '../home/home_page.dart';
+import '../../../../card/presentation/pages/cart/cart_page.dart';
 
+@RoutePage()
 class MainPage extends StatefulWidget {
   const MainPage({super.key});
 
@@ -27,20 +36,23 @@ class _MainPageState extends State<MainPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: SafeArea(
-        child: PageView(
-          controller: pageController,
-          physics: const NeverScrollableScrollPhysics(),
-          onPageChanged: (value) {
-            _currentIndex = value;
-            setState(() {});
-          },
-          children: const [
-            HomePage(),
-            ProductPage(),
-            Scaffold(),
-            Scaffold(),
-          ],
+      body: MultiBlocProvider(
+        providers: [BlocProvider(create: (_) => sl<MainScreenCubit>())],
+        child: SafeArea(
+          child: PageView(
+            controller: pageController,
+            physics: const NeverScrollableScrollPhysics(),
+            onPageChanged: (value) {
+              _currentIndex = value;
+              setState(() {});
+            },
+            children: const [
+              HomePage(),
+              CartPage(),
+              HistoryPage(),
+              AboutPage(),
+            ],
+          ),
         ),
       ),
       bottomNavigationBar: Theme(
@@ -62,41 +74,46 @@ class _MainPageState extends State<MainPage> {
             fontSize: 13,
             height: 1.6,
           ),
-          selectedItemColor: Colors.green,
+          selectedItemColor: AppColors.green,
           items: [
             BottomNavigationBarItem(
               label: "Главная",
               icon: SvgPicture.asset(
-                "assets/svg/home.svg",
+                "assets/svg/main/home.svg",
                 width: 28,
                 height: 28,
-                color: _currentIndex == 0 ? Colors.green : Colors.grey,
+                // ignore: deprecated_member_use
+                color: _currentIndex == 0 ? AppColors.green : Colors.grey,
               ),
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                "assets/svg/bag.svg",
+                "assets/svg/main/bag.svg",
                 width: 28,
                 height: 28,
-                color: _currentIndex == 1 ? Colors.green : Colors.grey,
+                // ignore: deprecated_member_use
+                color: _currentIndex == 1 ? AppColors.green : Colors.grey,
               ),
               label: "Корзина",
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                "assets/svg/clock.svg",
+                "assets/svg/main/clock.svg",
                 width: 28,
                 height: 28,
-                color: _currentIndex == 2 ? Colors.green : Colors.grey,
+
+                // ignore: deprecated_member_use
+                color: _currentIndex == 2 ? AppColors.green : Colors.grey,
               ),
               label: "История",
             ),
             BottomNavigationBarItem(
               icon: SvgPicture.asset(
-                "assets/svg/info.svg",
+                "assets/svg/main/info.svg",
                 width: 28,
                 height: 28,
-                color: _currentIndex == 3 ? Colors.green : Colors.grey,
+                // ignore: deprecated_member_use
+                color: _currentIndex == 3 ? AppColors.green : Colors.grey,
               ),
               label: "Инфо",
             ),
