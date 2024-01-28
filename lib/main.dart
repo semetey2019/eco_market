@@ -1,8 +1,6 @@
 import 'package:eco_market/config/config.dart';
-
 import 'package:eco_market/features/main/presentation/cubit/main_screen_cubit.dart';
 import 'package:eco_market/features/main/presentation/pages/main/main.dart';
-
 import 'package:eco_market/features/search/presentation/cubit/search_screen_cubit.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
