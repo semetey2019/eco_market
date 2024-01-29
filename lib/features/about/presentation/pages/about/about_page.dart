@@ -2,7 +2,6 @@ import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:svg_flutter/svg_flutter.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../widgets/about_bottom_sheet.dart';
 import '../../widgets/social_bottom_widget.dart';
 
@@ -87,7 +86,7 @@ class _AboutPageState extends State<AboutPage> {
                     ),
                   ],
                 ),
-              )
+              ),
             ],
           ),
         ),
